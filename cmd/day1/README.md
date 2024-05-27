@@ -346,3 +346,124 @@ https://learnku.com/docs/the-way-to-go/basic-types-and-operators/3586#5cad4b
 > * `%v` `%d` 输出表示字符的整数
 > * `%U` 输出格式为 `U+hhhh` 的字符串
 
+
+> unicode 包有一些测试字符串的函数
+> * `unicode.IsLetter(ch)`  是否字母
+> * `unicode.IsDigit(ch)`  是否数字
+> * `unicode.IsSpace(ch)`  是否空白
+
+
+## 字符串 string
+
+> string的零值为： `""`
+
+字符串表示
+* 解释字符串
+  * 用双引号包围 `""`
+  * 转义字符
+    * 换行符 `\n`
+    * 回车符 `\r`
+    * tab `\t`
+    * Unicode 字符 `\u`  `\U`
+    * 反斜杠自身  `\\`
+* 非解释字符串
+  * 该类字符串使用反引号 `` ` `` 括起来，支持换行
+
+### 字符串比较
+
+一般的比较运算符（`==`、`!=`、`<`、`<=`、`>=`、`>`），通过在内存中按字节进行比较
+
+
+### 字符串截取
+
+> **需要注意的是，这种转换方案只对纯 ASCII 码的字符串有效。**
+> 
+> 字符串内容可以通过索引进行获取，索引从 0 开始计数
+
+```
+s[0] // 第一个字节
+s[len(s) -1] // 最后一个字节
+```
+
+
+### 字符串拼接
+
+用 `+` 进行字符串拼接
+
+加号拼接并不是最高效的做法，可选用 `strings` 包
+
+```
+s := "aaa" + "bbb"
+s += "dddd"
+```
+
+### strings 包
+
+用于字符串处理相关
+
+> strings.HasPrefix(s, prefix string) bool
+> 
+> 是否以字符串开头
+---
+> strings.HasSuffix(s, suffix string) bool
+>
+> 是否以字符串结尾
+---
+> strings.Contains(s, substr string) bool
+> 
+> 是否包含字符串
+---
+> strings.Index(s, str string) int
+> 获取字符串索引， -1 表示不包含
+> 
+> strings.LastIndex(s, str string) int
+> 获取字符串最后的索引， -1 表示不包含
+---
+> strings.Replace(str, old, new string, n int) string
+> 
+> 替换字符串，返回新字符串， n=-1 表示替换所有字符串
+
+### strconv 包
+
+用于字符串相关的类型转换
+
+文档：https://pkg.go.dev/strconv
+
+## 日期和时间
+
+`time` 包
+
+`t := time.Now()`
+
+* t.Day()
+* t.Year()
+
+### 格式化
+
+这里很大不同，不是以常见的 `yyyy-MM-dd`
+
+而是用 golang 诞生的时间 `2006-01-02 15:04:05 -0700 MST` 作为格式化
+
+记忆技巧：
+
+`月/日/时/分/秒/年/时区`
+
+`1/2/3/4/5/6/7`
+
+`01/02/03:04:05PM/06/-0700`
+
+```
+// 示例
+fmt.Println("yyyy-MM-dd hh:mm:ss ->" + t.Format("2006-01-02 15:04:05"))
+fmt.Println("yyyyMMdd ->", t.Format("20060102"))
+fmt.Println("yyMMdd ->", t.Format("060102"))
+fmt.Println("hh:mm:ss ->", t.Format("15:04:05"))
+fmt.Println("hh:mm:ss.ffffff ->", t.Format("15:04:05.000000"))
+```
+
+## 指针
+
+参考：https://go.timpaik.top/04.9.html
+
+
+

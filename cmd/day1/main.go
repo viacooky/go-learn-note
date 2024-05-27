@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
+	"unicode"
 )
 
 const (
@@ -35,9 +37,53 @@ func main() {
 	// bool
 	//boolFunc()
 
-	//intergerFunc()
+	//integerFunc()
 
-	charFunc()
+	//charFunc()
+
+	//str()
+
+	timeFunc()
+
+}
+
+func timeFunc() {
+	t := time.Now()
+	fmt.Println(t.Weekday())
+	fmt.Println(t.Year())
+	fmt.Println(t.Month())
+	fmt.Println(t.Day())
+	fmt.Println("yyyy-MM-dd hh:mm:ss ->" + t.Format("2006-01-02 15:04:05"))
+	fmt.Println("yyyyMMdd ->", t.Format("20060102"))
+	fmt.Println("yyMMdd ->", t.Format("060102"))
+	fmt.Println("hh:mm:ss ->", t.Format("15:04:05"))
+	fmt.Println("hh:mm:ss.ffffff ->", t.Format("15:04:05.000000"))
+
+}
+
+func str() {
+	a := "aaaa\nbbbb"
+	fmt.Println(a)
+
+	fmt.Println(LINE)
+
+	b := `asdfsdf
+sadfsadf;klja;sdf \n
+casdfasdfe`
+	fmt.Println(b)
+
+	fmt.Println(LINE)
+
+	s := "abcdefg"
+
+	fmt.Println(s[0])
+	fmt.Println(s[len(s)-1])
+
+	fmt.Println(LINE)
+
+	s2 := "aaa" + "bbb"
+	s2 += "dddd"
+	fmt.Println(s2)
 
 }
 
@@ -66,9 +112,17 @@ func charFunc() {
 	fmt.Printf("UTF-8 code point: %U", aChar2)
 	fmt.Println()
 
+	fmt.Println(LINE)
+
+	var aChar3 rune = '\x41'
+	flag := unicode.IsNumber(aChar3)
+	fmt.Println(flag)
+	flag = unicode.IsLetter(aChar3)
+	fmt.Println(flag)
+
 }
 
-func intergerFunc() {
+func integerFunc() {
 	//var a32 int32 = 32
 
 	var uintVar int = -32
